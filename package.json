@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/egoods/fullstack-javascript-project-44#readme",
   "dependencies": {
-    "console": "^0.7.2"
+    "console": "^0.7.2",
+    "readline-sync": "^1.4.10"
   },
   "type": "module",
   "bin": {
