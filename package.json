@@ -18,6 +18,9 @@
   "homepage": "https://github.com/egoods/fullstack-javascript-project-44#readme",
   "dependencies": {
     "console": "^0.7.2",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "readline-sync": "^1.4.10"
   },
   "type": "module",
