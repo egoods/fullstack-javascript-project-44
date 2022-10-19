@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import SayHello from './cli.js';
+import SayHello from './modules/cli.js';
 
 SayHello();

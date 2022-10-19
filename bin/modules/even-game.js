@@ -8,7 +8,7 @@ import {
   PrintRetry,
   PrintQuestion,
   PrintCongratulation,
-} from './game.js';
+} from './game-engine.js';
 
 const PrintRules = () => console.log('Answer "yes" if the number is even, otherwise answer "no".');
 

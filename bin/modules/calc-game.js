@@ -8,7 +8,7 @@ import {
   PrintRetry,
   PrintQuestion,
   PrintCongratulation,
-} from './game.js';
+} from './game-engine.js';
 
 const PrintRules = () => console.log('What is the result of the expression?');
 
