@@ -1,57 +1,57 @@
 import {
-  PrintWelcome,
-  GetName,
-  PrintGreetings,
-  GetAnswer,
-  PrintCorrect,
-  PrintWrongAnswer,
-  PrintRetry,
-  PrintQuestion,
-  PrintCongratulation,
+  printWelcome,
+  getName,
+  printGreetings,
+  getAnswer,
+  printCorrect,
+  printWrongAnswer,
+  printRetry,
+  printQuestion,
+  printCongratulation,
 } from './game-engine.js';
 
-const PrintRules = () => console.log('What number is missing in the progression?');
+const printRules = () => console.log('What number is missing in the progression?');
 
-const GenerateProgression = () => {
+const generateProgression = () => {
   const startProgression = 1 + Math.round(Math.random() * 9);
   const progressionStep = 1 + Math.round(Math.random() * 9);
   const progressionLen = 5 + Math.round(Math.random() * 5);
   return Array.from({ length: progressionLen }, (_, i) => startProgression + i * progressionStep);
 };
 
-const PlayGame = () => {
-  PrintWelcome();
+const playGame = () => {
+  printWelcome();
 
-  const name = GetName();
+  const name = getName();
 
-  PrintGreetings(name);
+  printGreetings(name);
 
-  PrintRules();
+  printRules();
 
   let correctAnswers = 0;
 
   while (correctAnswers < 3) {
-    const progression = GenerateProgression();
+    const progression = generateProgression();
     const removedIndex = Math.round(Math.random() * (progression.length - 1));
 
     const correctAnswer = progression[removedIndex].toString();
     progression[removedIndex] = '..';
 
-    PrintQuestion(progression.join(' '));
+    printQuestion(progression.join(' '));
 
-    const answer = GetAnswer(name);
+    const answer = getAnswer(name);
 
     if (answer === correctAnswer) {
       correctAnswers += 1;
-      PrintCorrect();
+      printCorrect();
     } else {
-      PrintWrongAnswer(answer, correctAnswer);
-      PrintRetry(name);
+      printWrongAnswer(answer, correctAnswer);
+      printRetry(name);
       return;
     }
   }
 
-  PrintCongratulation(name);
+  printCongratulation(name);
 };
 
-export default PlayGame;
+export default playGame;

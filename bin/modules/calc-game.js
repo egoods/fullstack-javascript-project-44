@@ -1,16 +1,16 @@
 import {
-  PrintWelcome,
-  GetName,
-  PrintGreetings,
-  GetAnswer,
-  PrintCorrect,
-  PrintWrongAnswer,
-  PrintRetry,
-  PrintQuestion,
-  PrintCongratulation,
+  printWelcome,
+  getName,
+  printGreetings,
+  getAnswer,
+  printCorrect,
+  printWrongAnswer,
+  printRetry,
+  printQuestion,
+  printCongratulation,
 } from './game-engine.js';
 
-const PrintRules = () => console.log('What is the result of the expression?');
+const printRules = () => console.log('What is the result of the expression?');
 
 const operationsList = {
   '+': (a, b) => a + b,
@@ -18,46 +18,46 @@ const operationsList = {
   '*': (a, b) => a * b,
 };
 
-const GetRandomOperation = () => {
+const getRandomOperation = () => {
   const keys = Object.keys(operationsList);
 
   return keys[Math.round(Math.random() * keys.length)];
 };
 
-const PlayGame = () => {
-  PrintWelcome();
+const playGame = () => {
+  printWelcome();
 
-  const name = GetName();
+  const name = getName();
 
-  PrintGreetings(name);
+  printGreetings(name);
 
-  PrintRules();
+  printRules();
 
   let correctAnswers = 0;
 
   while (correctAnswers < 3) {
     const fisrtOperand = Math.round(Math.random() * 100);
     const secondOperand = Math.round(Math.random() * 100);
-    const operation = GetRandomOperation();
+    const operation = getRandomOperation();
 
     const question = `${fisrtOperand} ${operation} ${secondOperand}`;
     const correctAnswer = operationsList[operation](fisrtOperand, secondOperand).toString();
 
-    PrintQuestion(question);
+    printQuestion(question);
 
-    const answer = GetAnswer(name);
+    const answer = getAnswer(name);
 
     if (answer === correctAnswer) {
       correctAnswers += 1;
-      PrintCorrect();
+      printCorrect();
     } else {
-      PrintWrongAnswer(answer, correctAnswer);
-      PrintRetry(name);
+      printWrongAnswer(answer, correctAnswer);
+      printRetry(name);
       return;
     }
   }
 
-  PrintCongratulation(name);
+  printCongratulation(name);
 };
 
-export default PlayGame;
+export default playGame;

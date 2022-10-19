@@ -1,19 +1,19 @@
 import readlineSync from 'readline-sync';
 
-export const PrintWelcome = () => console.log('Welcome to the Brain Games!');
+export const printWelcome = () => console.log('Welcome to the Brain Games!');
 
-export const GetName = () => readlineSync.question('May I have your name? ');
+export const getName = () => readlineSync.question('May I have your name? ');
 
-export const PrintGreetings = (name) => console.log(`Hello, ${name}!`);
+export const printGreetings = (name) => console.log(`Hello, ${name}!`);
 
-export const PrintCongratulation = (name) => console.log(`Congratulations, ${name}!`);
+export const printCongratulation = (name) => console.log(`Congratulations, ${name}!`);
 
-export const PrintRetry = (name) => console.log(`Let's try again, ${name}!`);
+export const printRetry = (name) => console.log(`Let's try again, ${name}!`);
 
-export const PrintQuestion = (number) => console.log(`Question: ${number}`);
+export const printQuestion = (number) => console.log(`Question: ${number}`);
 
-export const GetAnswer = () => readlineSync.question('Your answer: ');
+export const getAnswer = () => readlineSync.question('Your answer: ');
 
-export const PrintWrongAnswer = (answer, correctAnswer) => console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
+export const printWrongAnswer = (answer, correctAnswer) => console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
 
-export const PrintCorrect = () => console.log('Correct!');
+export const printCorrect = () => console.log('Correct!');

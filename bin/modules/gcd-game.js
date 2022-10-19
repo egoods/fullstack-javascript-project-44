@@ -1,16 +1,16 @@
 import {
-  PrintWelcome,
-  GetName,
-  PrintGreetings,
-  GetAnswer,
-  PrintCorrect,
-  PrintWrongAnswer,
-  PrintRetry,
-  PrintQuestion,
-  PrintCongratulation,
+  printWelcome,
+  getName,
+  printGreetings,
+  getAnswer,
+  printCorrect,
+  printWrongAnswer,
+  printRetry,
+  printQuestion,
+  printCongratulation,
 } from './game-engine.js';
 
-const PrintRules = () => console.log('Find the greatest common divisor of given numbers.');
+const printRules = () => console.log('Find the greatest common divisor of given numbers.');
 
 const euclidianGdc = (a, b) => {
   if (a === 0) {
@@ -24,14 +24,14 @@ const euclidianGdc = (a, b) => {
   return (a >= b ? euclidianGdc(b, a % b) : euclidianGdc(a, b % a));
 };
 
-const PlayGame = () => {
-  PrintWelcome();
+const playGame = () => {
+  printWelcome();
 
-  const name = GetName();
+  const name = getName();
 
-  PrintGreetings(name);
+  printGreetings(name);
 
-  PrintRules();
+  printRules();
 
   let correctAnswers = 0;
 
@@ -41,21 +41,21 @@ const PlayGame = () => {
 
     const correctAnswer = euclidianGdc(firstOperand, secondOperand).toString();
 
-    PrintQuestion(`${firstOperand} ${secondOperand}`);
+    printQuestion(`${firstOperand} ${secondOperand}`);
 
-    const answer = GetAnswer(name);
+    const answer = getAnswer(name);
 
     if (answer === correctAnswer) {
       correctAnswers += 1;
-      PrintCorrect();
+      printCorrect();
     } else {
-      PrintWrongAnswer(answer, correctAnswer);
-      PrintRetry(name);
+      printWrongAnswer(answer, correctAnswer);
+      printRetry(name);
       return;
     }
   }
 
-  PrintCongratulation(name);
+  printCongratulation(name);
 };
 
-export default PlayGame;
+export default playGame;
