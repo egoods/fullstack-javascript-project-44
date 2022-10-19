@@ -1,24 +1,24 @@
 import readlineSync from 'readline-sync';
 
-export const printWelcome = () => console.log('Welcome to the Brain Games!');
+const printWelcome = () => console.log('Welcome to the Brain Games!');
 
-export const getName = () => readlineSync.question('May I have your name? ');
+const getName = () => readlineSync.question('May I have your name? ');
 
-export const printGreetings = (name) => console.log(`Hello, ${name}!`);
+const printGreetings = (name) => console.log(`Hello, ${name}!`);
 
-export const printCongratulation = (name) => console.log(`Congratulations, ${name}!`);
+const printCongratulation = (name) => console.log(`Congratulations, ${name}!`);
 
-export const printRetry = (name) => console.log(`Let's try again, ${name}!`);
+const printRetry = (name) => console.log(`Let's try again, ${name}!`);
 
-export const printQuestion = (number) => console.log(`Question: ${number}`);
+const printQuestion = (number) => console.log(`Question: ${number}`);
 
-export const getAnswer = () => readlineSync.question('Your answer: ');
+const getAnswer = () => readlineSync.question('Your answer: ');
 
-export const printWrongAnswer = (answer, correctAnswer) => console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
+const printWrongAnswer = (answer, correctAnswer) => console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
 
-export const printCorrect = () => console.log('Correct!');
+const printCorrect = () => console.log('Correct!');
 
-export const playGame = (getQuestionAndAnswerFunc, correctAnswersToWin = 3) => {
+const playGame = (getQuestionAndAnswerFunc, correctAnswersToWin) => {
   let correctAnswers = 0;
   while (correctAnswers < correctAnswersToWin) {
     const [question, correctAnswer] = getQuestionAndAnswerFunc();
@@ -37,3 +37,21 @@ export const playGame = (getQuestionAndAnswerFunc, correctAnswersToWin = 3) => {
 
   return true;
 };
+
+const launchGame = (printRulesFunc, getQuestionAndAnswerFunc, correctAnswersToWin = 3) => {
+  printWelcome();
+
+  const name = getName();
+
+  printGreetings(name);
+
+  printRulesFunc();
+
+  if (playGame(getQuestionAndAnswerFunc, correctAnswersToWin)) {
+    printCongratulation(name);
+  } else {
+    printRetry(name);
+  }
+};
+
+export default launchGame;

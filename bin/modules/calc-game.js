@@ -1,11 +1,4 @@
-import {
-  printWelcome,
-  getName,
-  printGreetings,
-  printRetry,
-  printCongratulation,
-  playGame,
-} from './game-engine.js';
+import launchGame from './game-engine.js';
 
 const printRules = () => console.log('What is the result of the expression?');
 
@@ -32,22 +25,4 @@ const getQuestionAndAnswer = () => {
   return [question, correctAnswer];
 };
 
-const setup = () => {
-  printWelcome();
-
-  const name = getName();
-
-  printGreetings(name);
-
-  printRules();
-
-  const gameResult = playGame(getQuestionAndAnswer);
-
-  if (gameResult) {
-    printCongratulation(name);
-  } else {
-    printRetry(name);
-  }
-};
-
-export default setup;
+export default () => launchGame(printRules, getQuestionAndAnswer);
