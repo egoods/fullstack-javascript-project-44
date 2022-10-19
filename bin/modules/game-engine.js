@@ -17,3 +17,23 @@ export const getAnswer = () => readlineSync.question('Your answer: ');
 export const printWrongAnswer = (answer, correctAnswer) => console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
 
 export const printCorrect = () => console.log('Correct!');
+
+export const playGame = (getQuestionAndAnswerFunc, correctAnswersToWin = 3) => {
+  let correctAnswers = 0;
+  while (correctAnswers < correctAnswersToWin) {
+    const [question, correctAnswer] = getQuestionAndAnswerFunc();
+
+    printQuestion(question);
+    const answer = getAnswer();
+
+    if (answer === correctAnswer) {
+      correctAnswers += 1;
+      printCorrect();
+    } else {
+      printWrongAnswer(answer, correctAnswer);
+      return false;
+    }
+  }
+
+  return true;
+};

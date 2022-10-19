@@ -2,17 +2,14 @@ import {
   printWelcome,
   getName,
   printGreetings,
-  getAnswer,
-  printCorrect,
-  printWrongAnswer,
   printRetry,
-  printQuestion,
   printCongratulation,
+  playGame,
 } from './game-engine.js';
 
 const printRules = () => console.log('Answer "yes" if the number is even, otherwise answer "no".');
 
-const playGame = () => {
+const setup = () => {
   printWelcome();
 
   const name = getName();
@@ -21,27 +18,17 @@ const playGame = () => {
 
   printRules();
 
-  let correctAnswers = 0;
-
-  while (correctAnswers < 3) {
+  const gameResult = playGame(() => {
     const guessedNumber = Math.round(Math.random() * 100);
     const correctAnswer = (guessedNumber % 2 === 0 ? 'yes' : 'no');
+    return [guessedNumber, correctAnswer];
+  });
 
-    printQuestion(guessedNumber);
-
-    const answer = getAnswer(name);
-
-    if (answer === correctAnswer) {
-      correctAnswers += 1;
-      printCorrect();
-    } else {
-      printWrongAnswer(answer, correctAnswer);
-      printRetry(name);
-      return;
-    }
+  if (gameResult) {
+    printCongratulation(name);
+  } else {
+    printRetry(name);
   }
-
-  printCongratulation(name);
 };
 
-export default playGame;
+export default setup;

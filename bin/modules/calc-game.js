@@ -2,12 +2,9 @@ import {
   printWelcome,
   getName,
   printGreetings,
-  getAnswer,
-  printCorrect,
-  printWrongAnswer,
   printRetry,
-  printQuestion,
   printCongratulation,
+  playGame,
 } from './game-engine.js';
 
 const printRules = () => console.log('What is the result of the expression?');
@@ -24,7 +21,18 @@ const getRandomOperation = () => {
   return keys[Math.round(Math.random() * keys.length)];
 };
 
-const playGame = () => {
+const getQuestionAndAnswer = () => {
+  const fisrtOperand = Math.round(Math.random() * 100);
+  const secondOperand = Math.round(Math.random() * 100);
+  const operation = getRandomOperation();
+
+  const question = `${fisrtOperand} ${operation} ${secondOperand}`;
+  const correctAnswer = operationsList[operation](fisrtOperand, secondOperand).toString();
+
+  return [question, correctAnswer];
+};
+
+const setup = () => {
   printWelcome();
 
   const name = getName();
@@ -33,31 +41,13 @@ const playGame = () => {
 
   printRules();
 
-  let correctAnswers = 0;
+  const gameResult = playGame(getQuestionAndAnswer);
 
-  while (correctAnswers < 3) {
-    const fisrtOperand = Math.round(Math.random() * 100);
-    const secondOperand = Math.round(Math.random() * 100);
-    const operation = getRandomOperation();
-
-    const question = `${fisrtOperand} ${operation} ${secondOperand}`;
-    const correctAnswer = operationsList[operation](fisrtOperand, secondOperand).toString();
-
-    printQuestion(question);
-
-    const answer = getAnswer(name);
-
-    if (answer === correctAnswer) {
-      correctAnswers += 1;
-      printCorrect();
-    } else {
-      printWrongAnswer(answer, correctAnswer);
-      printRetry(name);
-      return;
-    }
+  if (gameResult) {
+    printCongratulation(name);
+  } else {
+    printRetry(name);
   }
-
-  printCongratulation(name);
 };
 
-export default playGame;
+export default setup;

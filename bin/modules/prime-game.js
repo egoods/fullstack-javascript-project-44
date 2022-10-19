@@ -2,12 +2,9 @@ import {
   printWelcome,
   getName,
   printGreetings,
-  getAnswer,
-  printCorrect,
-  printWrongAnswer,
   printRetry,
-  printQuestion,
   printCongratulation,
+  playGame,
 } from './game-engine.js';
 
 const printRules = () => console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
@@ -26,7 +23,14 @@ const isPrime = (a) => {
   return true;
 };
 
-const playGame = () => {
+const getQuestionAndAnswer = () => {
+  const number = Math.round(Math.random() * 100);
+  const correctAnswer = (isPrime(number) ? 'yes' : 'no');
+
+  return [number, correctAnswer];
+};
+
+const setup = () => {
   printWelcome();
 
   const name = getName();
@@ -35,28 +39,13 @@ const playGame = () => {
 
   printRules();
 
-  let correctAnswers = 0;
+  const gameResult = playGame(getQuestionAndAnswer);
 
-  while (correctAnswers < 3) {
-    const number = Math.round(Math.random() * 100);
-
-    const correctAnswer = (isPrime(number) ? 'yes' : 'no');
-
-    printQuestion(number);
-
-    const answer = getAnswer(name);
-
-    if (answer === correctAnswer) {
-      correctAnswers += 1;
-      printCorrect();
-    } else {
-      printWrongAnswer(answer, correctAnswer);
-      printRetry(name);
-      return;
-    }
+  if (gameResult) {
+    printCongratulation(name);
+  } else {
+    printRetry(name);
   }
-
-  printCongratulation(name);
 };
 
-export default playGame;
+export default setup;

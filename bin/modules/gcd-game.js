@@ -2,12 +2,9 @@ import {
   printWelcome,
   getName,
   printGreetings,
-  getAnswer,
-  printCorrect,
-  printWrongAnswer,
   printRetry,
-  printQuestion,
   printCongratulation,
+  playGame,
 } from './game-engine.js';
 
 const printRules = () => console.log('Find the greatest common divisor of given numbers.');
@@ -24,7 +21,16 @@ const euclidianGdc = (a, b) => {
   return (a >= b ? euclidianGdc(b, a % b) : euclidianGdc(a, b % a));
 };
 
-const playGame = () => {
+const getQuestionAndAnswer = () => {
+  const firstOperand = Math.round(Math.random() * 100);
+  const secondOperand = Math.round(Math.random() * 100);
+
+  const correctAnswer = euclidianGdc(firstOperand, secondOperand).toString();
+
+  return [`${firstOperand} ${secondOperand}`, correctAnswer];
+};
+
+const setup = () => {
   printWelcome();
 
   const name = getName();
@@ -33,29 +39,13 @@ const playGame = () => {
 
   printRules();
 
-  let correctAnswers = 0;
+  const gameResult = playGame(getQuestionAndAnswer);
 
-  while (correctAnswers < 3) {
-    const firstOperand = Math.round(Math.random() * 100);
-    const secondOperand = Math.round(Math.random() * 100);
-
-    const correctAnswer = euclidianGdc(firstOperand, secondOperand).toString();
-
-    printQuestion(`${firstOperand} ${secondOperand}`);
-
-    const answer = getAnswer(name);
-
-    if (answer === correctAnswer) {
-      correctAnswers += 1;
-      printCorrect();
-    } else {
-      printWrongAnswer(answer, correctAnswer);
-      printRetry(name);
-      return;
-    }
+  if (gameResult) {
+    printCongratulation(name);
+  } else {
+    printRetry(name);
   }
-
-  printCongratulation(name);
 };
 
-export default playGame;
+export default setup;

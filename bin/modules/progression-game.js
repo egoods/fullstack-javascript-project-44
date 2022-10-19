@@ -2,12 +2,9 @@ import {
   printWelcome,
   getName,
   printGreetings,
-  getAnswer,
-  printCorrect,
-  printWrongAnswer,
   printRetry,
-  printQuestion,
   printCongratulation,
+  playGame,
 } from './game-engine.js';
 
 const printRules = () => console.log('What number is missing in the progression?');
@@ -19,7 +16,17 @@ const generateProgression = () => {
   return Array.from({ length: progressionLen }, (_, i) => startProgression + i * progressionStep);
 };
 
-const playGame = () => {
+const getQuestionAndAnswer = () => {
+  const progression = generateProgression();
+  const removedIndex = Math.round(Math.random() * (progression.length - 1));
+
+  const correctAnswer = progression[removedIndex].toString();
+  progression[removedIndex] = '..';
+
+  return [progression.join(' '), correctAnswer];
+};
+
+const setup = () => {
   printWelcome();
 
   const name = getName();
@@ -28,30 +35,13 @@ const playGame = () => {
 
   printRules();
 
-  let correctAnswers = 0;
+  const gameResult = playGame(getQuestionAndAnswer);
 
-  while (correctAnswers < 3) {
-    const progression = generateProgression();
-    const removedIndex = Math.round(Math.random() * (progression.length - 1));
-
-    const correctAnswer = progression[removedIndex].toString();
-    progression[removedIndex] = '..';
-
-    printQuestion(progression.join(' '));
-
-    const answer = getAnswer(name);
-
-    if (answer === correctAnswer) {
-      correctAnswers += 1;
-      printCorrect();
-    } else {
-      printWrongAnswer(answer, correctAnswer);
-      printRetry(name);
-      return;
-    }
+  if (gameResult) {
+    printCongratulation(name);
+  } else {
+    printRetry(name);
   }
-
-  printCongratulation(name);
 };
 
-export default playGame;
+export default setup;
